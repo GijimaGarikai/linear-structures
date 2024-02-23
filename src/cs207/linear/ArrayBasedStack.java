@@ -56,7 +56,11 @@ public class ArrayBasedStack<T> implements Stack<T> {
 
   @Override
   public T peek() throws Exception {
-    return this.values[this.size - 1];
+    try {
+      return this.values[this.size - 1];
+    } catch (Exception e) {
+      throw new Exception("Size is 0");
+    }
   } // peek()
 
   @Override
@@ -64,6 +68,7 @@ public class ArrayBasedStack<T> implements Stack<T> {
     if (this.isFull()) {
       throw new Exception("full");
     } // if full
+    this.values[this.size] = val;
     this.size++;
   } // put(T)
 
