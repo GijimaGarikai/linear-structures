@@ -54,7 +54,7 @@ public class ArrayBasedQueue<T> implements Queue<T> {
 
   @Override
   public boolean isEmpty() {
-    return this.size <= 0;
+    return this.values[this.front] == null;
   } // isEmpty()
 
   @Override
@@ -67,7 +67,7 @@ public class ArrayBasedQueue<T> implements Queue<T> {
     if (this.isFull()) {
       throw new Exception("no more room!");
     } // this.isFull()
-    this.values[this.back()] = val;
+    this.values[this.back()%this.values.length] = val;
     ++this.size;
   } // put(T)
 
@@ -80,7 +80,7 @@ public class ArrayBasedQueue<T> implements Queue<T> {
     T result = this.values[this.front];
     this.values[this.front++] = null;
     // We're removing an element, so decrement the size
-    --this.size;
+    //--this.size;
     // And we're done
     return result;
   } // get(T)
